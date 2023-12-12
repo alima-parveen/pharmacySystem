@@ -4,15 +4,22 @@ package pharmacysystem;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
 import java.sql.*;
 import com.toedter.calendar.JDateChooser;
 import java.util.*;
 import javax.swing.border.LineBorder;
 import java.sql.Date;
+
+import java.sql.*;
+import com.toedter.calendar.JDateChooser;
+import java.util.*;
+import javax.swing.border.LineBorder;
+
   
 
 public class PatientRegistration extends JFrame implements ActionListener{
-    
+
     JLabel l1,l3,l4,l5,l6,l7,l8,l9,l11,l13,l14,l15,heading;
     JTextField t1,t2,t3,t4,t5;
     JRadioButton r1,r2;
@@ -29,6 +36,20 @@ public class PatientRegistration extends JFrame implements ActionListener{
         setSize(850,800);
         setLocation(400,20);
         
+
+    JLabel l1,l3,l4,l5,l6,l7,l8,l9,l11,l13,l14,l15;
+    JTextField t1,t2,t3,t4,t5;
+    JRadioButton r1,r2;
+    JButton b;
+    JDateChooser dateChooser;
+    
+    
+    Random ran = new Random();
+    long first4 = (ran.nextLong() % 90000L) + 10000L;
+    String first = "" + Math.abs(first4);
+    
+    PatientRegistration(){
+
         setTitle("NEW PATIENT RECORD");       
         
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/registration.png"));
@@ -37,12 +58,21 @@ public class PatientRegistration extends JFrame implements ActionListener{
         JLabel l11 = new JLabel(i3);
         l11.setBounds(80, 30, 100, 100);
         add(l11);
+
        
 
         l1 = new JLabel("Patient ID "+first);
         l1.setFont(new Font("Raleway", Font.BOLD, 38));
         l1.setForeground(new Color(139, 69, 19));
                 
+
+        
+        l1 = new JLabel("FORM NO. "+first);
+        l1.setFont(new Font("Raleway", Font.BOLD, 38));
+        l1.setForeground(new Color(139, 69, 19));
+        
+        
+
         l3 = new JLabel("Name:");
         l3.setFont(new Font("Raleway", Font.BOLD, 20));
         
@@ -97,6 +127,12 @@ public class PatientRegistration extends JFrame implements ActionListener{
         cancel.setBackground(Color.BLACK);
         cancel.setForeground(Color.WHITE);
         cancel.setFont(new Font("Tahoma", Font.BOLD, 15));
+
+        b = new JButton("SUBMIT");
+        b.setFont(new Font("Raleway", Font.BOLD, 14));
+        b.setBackground(Color.BLACK);
+        b.setForeground(Color.WHITE);
+
         
         r1 = new JRadioButton("Male");
         r1.setFont(new Font("Raleway", Font.BOLD, 14));
@@ -163,6 +199,7 @@ public class PatientRegistration extends JFrame implements ActionListener{
         add(t5);
         
       //submit button
+
         submit.setBounds(250,550,120,30);
         submit.addActionListener(this); 
         add(submit);
@@ -225,6 +262,37 @@ public class PatientRegistration extends JFrame implements ActionListener{
     
 }
        
+        b.setBounds(620,660,100,30);
+        add(b);
+        
+        b.addActionListener(this); 
+        
+        getContentPane().setBackground(new Color(252, 228, 236));
+        setSize(850,800);
+        setLocation(400,20);
+        setVisible(true);
+    }
+    
+    public void actionPerformed(ActionEvent ae){
+        
+        String patient_id = first;
+        String name = t1.getText();
+        String age = t2.getText();
+        String dob = ((JTextField) dateChooser.getDateEditor().getUiComponent()).getText();
+        
+        String gender = null;
+        if(r1.isSelected()){ 
+            gender = "Male";
+        }else if(r2.isSelected()){ 
+            gender = "Female";
+        }
+            
+        String email = t3.getText();
+        String contact = t4.getText();          
+        String address = t5.getText();
+               
+    }
+
     public static void main(String[] args){
         new PatientRegistration().setVisible(true);
     }
