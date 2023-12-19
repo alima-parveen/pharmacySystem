@@ -6,7 +6,7 @@ import java.awt.event.*;
 
 public class HomePage extends JFrame implements ActionListener {
 
-    public JButton patient, billing, upadtePatient, patientDetails;
+    public JButton patient, billing, upadtePatient, patientDetails, closePage, deletePatient;
 
     HomePage() {
 
@@ -54,7 +54,25 @@ public class HomePage extends JFrame implements ActionListener {
         patientDetails.addActionListener(this);
         patientDetails.setHorizontalAlignment(SwingConstants.CENTER);
         patientDetails.setFont(new Font("Tahoma", Font.BOLD, 15));
-        backgroundLabel.add(patientDetails);              
+        backgroundLabel.add(patientDetails); 
+        
+        deletePatient = new JButton("Delete Patient");
+        deletePatient.setBounds(350, 120, 300, 60);
+        deletePatient.setBackground(Color.BLACK);
+        deletePatient.setForeground(Color.WHITE);
+        deletePatient.addActionListener(this);
+        deletePatient.setHorizontalAlignment(SwingConstants.CENTER);
+        deletePatient.setFont(new Font("Tahoma", Font.BOLD, 15));
+        backgroundLabel.add(deletePatient); 
+        
+        closePage = new JButton("LogOut");
+        closePage.setBounds(550, 600, 300, 50);
+        closePage.setBackground(Color.RED);
+        closePage.setForeground(Color.black);
+        closePage.addActionListener(this);
+        closePage.setHorizontalAlignment(SwingConstants.CENTER);
+        closePage.setFont(new Font("Tahoma", Font.BOLD, 15));
+        backgroundLabel.add(closePage); 
 
         setVisible(true);
     }
@@ -84,9 +102,15 @@ public class HomePage extends JFrame implements ActionListener {
         else if (msg.equals("Update Patient")) {
             new PatientUpdate();
         }
+        else if (msg.equals("Delete Patient")) {
+            new PatientDelete();
+        }
         else if (msg.equals("Billing")) {
-            ChemistBilling chemistBilling = new ChemistBilling();
-            chemistBilling.setVisible(true);
+            BillingPage BillingPage = new BillingPage();
+            BillingPage.setVisible(true);
+        }
+        else if (msg.equals("LogOut")) {
+            setVisible(false);
         }
     }
 
