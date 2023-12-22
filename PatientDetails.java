@@ -12,7 +12,7 @@ public class PatientDetails extends JFrame implements ActionListener{
     
     Choice patientid;
     JTable table;
-    JButton search, print, update, add, cancel;
+    JButton search, print, update, add, cancel,delete;
     JLabel heading;
     JTableHeader header;
     
@@ -43,7 +43,6 @@ public class PatientDetails extends JFrame implements ActionListener{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
         
         table = new JTable();
         table.setBackground(new Color(225, 245, 254 )); // Use color
@@ -95,12 +94,20 @@ public class PatientDetails extends JFrame implements ActionListener{
         update.setForeground(Color.WHITE); // Button text color
         update.addActionListener(this); // Commented out as per your code
         add(update);
+        
         cancel = new JButton("Cancel");
-        cancel.setBounds(420, 70, 80, 20);
+        cancel.setBounds(520, 70, 80, 20);
         cancel.setBackground(new Color(31, 97, 141)); // Button background color
         cancel.setForeground(Color.WHITE); // Button text color
         cancel.addActionListener(this);
         add(cancel);
+        
+        delete = new JButton("Delete");
+        delete.setBounds(420, 70, 80, 20);
+        delete.setBackground(new Color(31, 97, 141)); // Button background color
+        delete.setForeground(Color.WHITE); // Button text color
+        delete.addActionListener(this);
+        add(delete);
 
         
         setVisible(true);
@@ -123,12 +130,16 @@ public class PatientDetails extends JFrame implements ActionListener{
                 e.printStackTrace();
             }
         } else if (ae.getSource() == add) {
-            setVisible(false);
+            setVisible(true);
             new PatientRegistration();
         } else if (ae.getSource() == update) {
-            setVisible(false);
+            setVisible(true);
             new PatientUpdate();
-        } else {
+        } else if (ae.getSource() == delete) {
+            setVisible(true);
+            new PatientDelete();
+        }
+        else {
             setVisible(false);
         }
     }
